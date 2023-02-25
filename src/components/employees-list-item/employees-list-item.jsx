@@ -2,7 +2,6 @@ import "./employees-list-item.css";
 import classNames from "classnames";
 import { Component } from "react";
 
-
 class EmployeesListItem extends Component {
   constructor(props) {
     super(props);
@@ -32,19 +31,17 @@ class EmployeesListItem extends Component {
     const { name, salary } = this.props;
     const { increase, rise } = this.state;
 
-    let classNames =  "list-group-item d-flex justify-content-between";
-    if (increase){
-      classNames += ' increase';
+    let classNames = "list-group-item d-flex justify-content-between";
+    if (increase) {
+      classNames += " increase";
     }
-
-    let classRise = "list-group-item-label"; 
     if (rise) {
-      classRise += ' like';
+      classNames += " like";
     }
 
     return (
-      <li className ={classNames}>
-        <span onClick={this.onRice} className={classRise}>
+      <li className={classNames}>
+        <span onClick={this.onRice} className="list-group-item-label">
           {name}
         </span>
         <input
