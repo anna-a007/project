@@ -9,7 +9,8 @@ const EmployeesList = ({ data, onDeleteItem }) => {
       <EmployeesListItem
         {...item}
         key={item.id}
-        onDeleteItem={() => onDeleteItem(item.id)}
+        // onDeleteItem={() => onDeleteItem(item.id)}  // функция, отв.за удаление из массива
+        onDeleteItem={onDeleteItem}
       />
     );
   });

@@ -24,9 +24,13 @@ class App extends Component {
       const newData = data.filter((item) => item.id !== id);
       return {
         data: newData,
+        
       };
     });
   };
+
+
+ 
 
   render() {
     return (
