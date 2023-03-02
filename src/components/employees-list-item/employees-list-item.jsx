@@ -59,7 +59,7 @@ class EmployeesListItem extends Component {
 
           <button
             type="button"
-            onClick={() => onDeleteItem(id)}
+            onClick={onDeleteItem}
             className="btn-trash btn-sm "
           >
             <i className="fas fa-trash"></i>

@@ -10,7 +10,7 @@ const EmployeesList = ({ data, onDeleteItem }) => {
         {...item}
         key={item.id}
         // onDeleteItem={() => onDeleteItem(item.id)}  // функция, отв.за удаление из массива
-        onDeleteItem={onDeleteItem}
+        onDeleteItem={() => onDeleteItem(item.id)}
       />
     );
   });
