@@ -70,10 +70,17 @@ class App extends Component {
     }));
   };
 
+  getIncrease = (data) => {
+    data.filter(({ increase }) => increase === true);
+  };
+
   render() {
     return (
       <div className="app">
-        <AppInfo />
+        <AppInfo
+          totalEmployess={this.state.data.length}
+          getIncrease={this.getIncrease}
+        />
 
         <div className="search-panel">
           <SearchPanel />
