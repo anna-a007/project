@@ -12,9 +12,9 @@ class App extends Component {
     super(props);
     this.state = {
       data: [
-        { name: "John", salary: 800, increase: false, id: 1 },
-        { name: "Alex", salary: 3000, increase: true, id: 2 },
-        { name: "Carl", salary: 5000, increase: false, id: 3 },
+        { name: "John", salary: 800, increase: false, rise: true, id: 1 },
+        { name: "Alex", salary: 3000, increase: true, rise: false, id: 2 },
+        { name: "Carl", salary: 5000, increase: false, rise: false, id: 3 },
       ],
     };
     this.maxID = 4;
@@ -46,6 +46,30 @@ class App extends Component {
     });
   };
 
+  //выделение цветом сотрудника
+  onToggleIncrease = (id) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, increase: !item.increase };
+        }
+        return item;
+      }),
+    }));
+  };
+
+  //появление stars
+  onToggleRice = (id) => {
+    this.setState(({ data }) => ({
+      data: data.map((item) => {
+        if (item.id === id) {
+          return { ...item, rise: !item.rise };
+        }
+        return item;
+      }),
+    }));
+  };
+
   render() {
     return (
       <div className="app">
@@ -59,6 +83,8 @@ class App extends Component {
         <EmployeesList
           data={this.state.data}
           onDeleteItem={this.onDeleteItem}
+          onToggleIncrease={this.onToggleIncrease}
+          onToggleRice={this.onToggleRice}
         />
         <EmployeesAddForm addItem={this.addItem} />
       </div>
