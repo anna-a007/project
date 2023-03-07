@@ -2,7 +2,7 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 
 import "./employees-list.css";
 
-const EmployeesList = ({ data, onDeleteItem }) => {
+const EmployeesList = ({ data, onDeleteItem ,onToggleIncrease,onToggleRice  }) => {
   const element = data.map((item) => {
     // const { id, ...itemProps } = item; //вытягиваем из объекта item
     return (
@@ -11,6 +11,9 @@ const EmployeesList = ({ data, onDeleteItem }) => {
         key={item.id}
         // onDeleteItem={() => onDeleteItem(item.id)}  // функция, отв.за удаление из массива
         onDeleteItem={() => onDeleteItem(item.id)}
+        onToggleIncrease={() => onToggleIncrease(item.id)}
+        onToggleRice={()=> onToggleRice (item.id)}
+
       />
     );
   });
