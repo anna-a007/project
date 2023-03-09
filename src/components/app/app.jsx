@@ -16,6 +16,7 @@ class App extends Component {
         { name: "Alex", salary: 3000, increase: true, rise: false, id: 2 },
         { name: "Carl", salary: 5000, increase: false, rise: false, id: 3 },
       ],
+      term: "",
     };
     this.maxID = 4;
   }
@@ -72,6 +73,20 @@ class App extends Component {
 
   getIncrease = (data) => data.filter(({ increase }) => increase === true);
 
+  //фильтрация(поиск по первой букве)
+  searchEmp = (items, term) => {
+    if (term.length === 0) {
+      return items;
+    }
+    return items.filter((item) => {
+      return item.name.toLowerCase().includes(term.trim().toLowerCase());
+    });
+  };
+
+  onUpdateSearch = (term) => {
+    this.setState({ term });
+  };
+
   render() {
     return (
       <div className="app">
@@ -81,7 +96,7 @@ class App extends Component {
         />
 
         <div className="search-panel">
-          <SearchPanel />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
           <AppFilter />
         </div>
 
