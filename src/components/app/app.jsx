@@ -17,6 +17,7 @@ class App extends Component {
         { name: "Carl", salary: 5000, increase: false, rise: false, id: 3 },
       ],
       term: "",
+      filter: "all",
     };
     this.maxID = 4;
   }
@@ -88,6 +89,8 @@ class App extends Component {
   };
 
   render() {
+    const { term, data } = this.state;
+
     return (
       <div className="app">
         <AppInfo
@@ -101,7 +104,8 @@ class App extends Component {
         </div>
 
         <EmployeesList
-          data={this.state.data}
+          data={this.searchEmp(data, term)} //передаем метод по фильтрации массива
+          // data={this.state.data}
           onDeleteItem={this.onDeleteItem}
           onToggleIncrease={this.onToggleIncrease}
           onToggleRice={this.onToggleRice}
