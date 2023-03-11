@@ -84,12 +84,31 @@ class App extends Component {
     });
   };
 
+  //обнавляет состояние term
   onUpdateSearch = (term) => {
     this.setState({ term });
   };
 
+  // //фильтрация по кнопкам
+  filterPost = (items, filter) => {
+    switch (filter) {
+      case "rise":
+        return items.filter((item) => item.rise);
+      case "moreThen1000":
+        return items.filter((item) => item.salary > 1000);
+      default:
+        return items;
+    }
+  };
+
+  //обнавляет состояние filter
+  onFilterSelect = (filter) => {
+    this.setState({ filter });
+  };
+
   render() {
-    const { term, data } = this.state;
+    const { term, data, filter } = this.state;
+    const visibleData = this.filterPost(this.searchEmp(data, term), filter)
 
     return (
       <div className="app">
@@ -100,11 +119,12 @@ class App extends Component {
 
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter />
+          <AppFilter filter={filter} onFilterSelect={this.onFilterSelect} />
         </div>
 
         <EmployeesList
-          data={this.searchEmp(data, term)} //передаем метод по фильтрации массива
+          // data={this.searchEmp(data, term)} //передаем измененный массив
+          data={visibleData} //передаем измененный массив
           // data={this.state.data}
           onDeleteItem={this.onDeleteItem}
           onToggleIncrease={this.onToggleIncrease}
