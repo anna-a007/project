@@ -16,6 +16,8 @@ class App extends Component {
         { name: "Alex", salary: 3000, increase: true, rise: false, id: 2 },
         { name: "Carl", salary: 5000, increase: false, rise: false, id: 3 },
       ],
+      term: "",
+      filter: "all",
     };
     this.maxID = 4;
   }
@@ -72,7 +74,42 @@ class App extends Component {
 
   getIncrease = (data) => data.filter(({ increase }) => increase === true);
 
+  //фильтрация(поиск по первой букве)
+  searchEmp = (items, term) => {
+    if (term.length === 0) {
+      return items;
+    }
+    return items.filter((item) => {
+      return item.name.toLowerCase().includes(term.trim().toLowerCase());
+    });
+  };
+
+  //обнавляет состояние term
+  onUpdateSearch = (term) => {
+    this.setState({ term });
+  };
+
+  // //фильтрация по кнопкам
+  filterPost = (items, filter) => {
+    switch (filter) {
+      case "rise":
+        return items.filter((item) => item.rise);
+      case "moreThen1000":
+        return items.filter((item) => item.salary > 1000);
+      default:
+        return items;
+    }
+  };
+
+  //обнавляет состояние filter
+  onFilterSelect = (filter) => {
+    this.setState({ filter });
+  };
+
   render() {
+    const { term, data, filter } = this.state;
+    const visibleData = this.filterPost(this.searchEmp(data, term), filter)
+
     return (
       <div className="app">
         <AppInfo
@@ -81,12 +118,14 @@ class App extends Component {
         />
 
         <div className="search-panel">
-          <SearchPanel />
-          <AppFilter />
+          <SearchPanel onUpdateSearch={this.onUpdateSearch} />
+          <AppFilter filter={filter} onFilterSelect={this.onFilterSelect} />
         </div>
 
         <EmployeesList
-          data={this.state.data}
+          // data={this.searchEmp(data, term)} //передаем измененный массив
+          data={visibleData} //передаем измененный массив
+          // data={this.state.data}
           onDeleteItem={this.onDeleteItem}
           onToggleIncrease={this.onToggleIncrease}
           onToggleRice={this.onToggleRice}
